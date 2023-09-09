@@ -7,7 +7,7 @@
 
 // Import required libraries and modules
 import React, { useState } from 'react';
-import { auth } from '../components/firebase';
+import { auth } from './firebase';
 
 /**
  * LoginForm Functional Component

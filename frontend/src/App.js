@@ -27,7 +27,7 @@ let web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 
 // Contract ABI and address
 // ABI and address are essential for interacting with smart contracts
-const ABI = [...]; // Replace with your contract's ABI
+const ABI = []; // Replace with your contract's ABI
 const contractAddress = "0x..."; // Replace with your contract's address
 const myContract = new web3.eth.Contract(ABI, contractAddress);
 

@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
 
 // Smart contract ABI and address (Replace with your contract's ABI and address)
-const ABI = [...];
+const ABI = [];
 const contractAddress = '0x...';
 
 /**
