@@ -1,0 +1,108 @@
+/**
+ * Chat Container Styles
+ * 
+ * This section styles the main container for the chat interface.
+ */
+.chat-container {
+  width: 400px;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/**
+ * Chat Header Styles
+ * 
+ * This section styles the header of the chat interface.
+ */
+.chat-header {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+/**
+ * Chat Display Area Styles
+ * 
+ * This section styles the area where chat messages are displayed.
+ */
+.chat-display {
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+/**
+ * General Chat Message Styles
+ * 
+ * This section styles individual chat messages.
+ */
+.chat-message {
+  margin-bottom: 10px;
+}
+
+/**
+ * Freelancer Chat Message Styles
+ * 
+ * This section styles chat messages sent by freelancers.
+ */
+.chat-message.freelancer {
+  color: blue;
+}
+
+/**
+ * Client Chat Message Styles
+ * 
+ * This section styles chat messages sent by clients.
+ */
+.chat-message.client {
+  color: green;
+}
+
+/**
+ * Chat Input Area Styles
+ * 
+ * This section styles the area where users can type and send messages.
+ */
+.chat-input-area {
+  display: flex;
+  padding: 10px;
+}
+
+/**
+ * Chat Input Field Styles
+ * 
+ * This section styles the input field for typing messages.
+ */
+.chat-input {
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/**
+ * Chat Send Button Styles
+ * 
+ * This section styles the button for sending chat messages.
+ */
+.chat-send-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/**
+ * Chat Send Button Hover Styles
+ * 
+ * This section styles the send button when hovered over.
+ */
+.chat-send-button:hover {
+  background-color: #0056b3;
+}

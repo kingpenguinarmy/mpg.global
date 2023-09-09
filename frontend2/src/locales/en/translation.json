@@ -1,0 +1,15 @@
+{
+    "PersonalInformation": "Personal Information",
+    "Name": "Name",
+    "Email": "Email",
+    "Skills": "Skills",
+    "Experience": "Experience",
+    "HourlyRate": "Hourly Rate",
+    "Availability": "Availability",
+    "ProjectPreferences": "Project Preferences",
+    "Portfolio": "Portfolio",
+    "BaseProjectAmount": "Base Project Amount",
+    "Next": "Next",
+    "Back": "Back",
+    "Submit": "Submit"
+  }

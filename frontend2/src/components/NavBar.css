@@ -1,0 +1,38 @@
+/**
+ * Navbar Styles
+ * 
+ * This CSS file contains styles for the navigation bar.
+ */
+
+/* Base styles for the navbar */
+.navbar {
+  background-color: #333;  /* Background color */
+  overflow: hidden;  /* Hide overflow */
+}
+
+/* Style the list within the navbar */
+.navbar ul {
+  list-style-type: none;  /* Remove list bullets */
+  margin: 0;  /* Remove margin */
+  padding: 0;  /* Remove padding */
+}
+
+/* Style each list item in the navbar */
+.navbar ul li {
+  float: left;  /* Float list items to the left */
+}
+
+/* Style the links within list items */
+.navbar ul li a {
+  display: block;  /* Display as block elements */
+  color: white;  /* Text color */
+  text-align: center;  /* Center-align text */
+  padding: 14px 16px;  /* Padding around text */
+  text-decoration: none;  /* Remove underline */
+}
+
+/* Style for hover effect on links */
+.navbar ul li a:hover {
+  background-color: #ddd;  /* Background color on hover */
+  color: black;  /* Text color on hover */
+}
