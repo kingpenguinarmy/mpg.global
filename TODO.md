@@ -1,4 +1,4 @@
-#Frontend
+# Frontend
 
 ## High Priority
 - [ ] **Mobile-First User Experience Design** tasks.
@@ -59,7 +59,7 @@
 - [ ] **Set up analytics tools to monitor these KPIs** tasks.
 
 
-#Backend
+# Backend
 
 ## High Priority
 
