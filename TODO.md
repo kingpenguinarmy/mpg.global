@@ -2,8 +2,9 @@
 
 ## **Frontend Coding:**
 - [X] HTML/CSS for Mobile & Web: September 29, 2023
-- [ ] User Registration and Login System Implementation: October 13, 2023
-- [ ] Basic Search Functionality Implementation: October 22, 2023
+- [X] User Registration and Login System Implementation: October 13, 2023
+- [X] Basic Search Functionality Implementation: October 22, 2023
+- [ ] Implament features above to work with the UI: 
 
 ## **Backend Coding:**
 - [ ] User Authentication and Authorization: November 2, 2023

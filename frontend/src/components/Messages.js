@@ -86,18 +86,50 @@ const Messages = () => {
     // Implement the search functionality here
     // Make an API call to search for messages based on the search query
     // Update the UI with the search results
+    const searchResults = messages.filter((message) =>
+      message.text.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setMessages(searchResults);
   };
 
   const handleTagMessage = (messageId) => {
     // Implement the tagging functionality here
     // Update the taggedMessages state to include the message with the given ID
     // Update the UI to indicate that the message is tagged
+  
+    // Find the message with the given ID
+    const messageIndex = messages.findIndex((message) => message._id === messageId);
+    if (messageIndex === -1) {
+      return;
+    }
+  
+    // Update the taggedMessages state
+    const updatedTaggedMessages = [...taggedMessages];
+    updatedTaggedMessages.push(messages[messageIndex]);
+    setTaggedMessages(updatedTaggedMessages);
+  
+    // Update the UI to indicate that the message is tagged
+    // ...
   };
-
   const handleReadReceipt = (messageId) => {
     // Implement the read receipt functionality here
     // Update the readReceipts state to include the message with the given ID
     // Update the UI to indicate that the message has been read
+  
+    // Find the message with the given ID
+    const messageIndex = messages.findIndex((message) => message._id === messageId);
+    if (messageIndex === -1) {
+      return;
+    }
+  
+    // Update the read receipts state
+    const updatedReadReceipts = [...readReceipts, messageId];
+    setReadReceipts(updatedReadReceipts);
+  
+    // Update the UI to indicate that the message has been read
+    const updatedMessages = [...messages];
+    updatedMessages[messageIndex].read = true;
+    setMessages(updatedMessages);
   };
 
   const handleFileChange = (event) => {
@@ -149,19 +181,77 @@ const Messages = () => {
   const handleViewMessageHistory = () => {
     // Show the message history in a modal or separate view
     // Allow the user to view and navigate through the message history
+    const modal = document.getElementById("messageHistoryModal");
+    modal.style.display = "block";
+
+    // Populate the modal with the message history
+    const messageHistoryContainer = document.getElementById("messageHistoryContainer");
+    messageHistoryContainer.innerHTML = "";
+    for (const message of messageHistory) {
+      const messageElement = document.createElement("div");
+      messageElement.classList.add("message");
+      messageElement.innerHTML = `
+        <div class="message-sender">${message.sender}</div>
+        <div class="message-timestamp">${message.timestamp}</div>
+        <div class="message-text">${message.text}</div>
+      `;
+      messageHistoryContainer.appendChild(messageElement);
+    }
+
+    // Add an event listener to the close button to close the modal
+    const closeButton = document.getElementById("messageHistoryCloseButton");
+    closeButton.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
   };
+
 
   const handlePinMessage = (messageId) => {
     // Implement the message pinning functionality here
     // Update the pinnedMessages state to include the message with the given ID
     // Update the UI to indicate that the message is pinned
+
+    // Find the message with the given ID
+    const messageIndex = messages.findIndex((message) => message._id === messageId);
+    if (messageIndex === -1) {
+      return;
+    }
+
+    // Update the pinnedMessages state
+    const updatedPinnedMessages = [...pinnedMessages];
+    updatedPinnedMessages.push(messages[messageIndex]);
+    setPinnedMessages(updatedPinnedMessages);
+
+    // Update the UI to indicate that the message is pinned
+    // ...
   };
 
-  const handleReaction = (messageId, reaction) => {
-    // Implement the reaction functionality here
-    // Update the reactions state to include the reaction for the given message ID
-    // Update the UI to show the reaction
+const handleReaction = (messageId, reaction) => {
+  // Implement the reaction functionality here
+  // Update the reactions state to include the reaction for the given message ID
+  // Update the UI to show the reaction
+
+  // Find the message with the given ID
+  const messageIndex = messages.findIndex((message) => message._id === messageId);
+  if (messageIndex === -1) {
+    return;
+  }
+
+  // Create a new reaction object
+  const newReaction = {
+    emoji: reaction,
+    userId: "user-id", // Replace this with the ID of the logged-in user
   };
+
+  // Add the reaction to the message
+  const updatedReactions = [...messages[messageIndex].reactions, newReaction];
+  const updatedMessages = [...messages];
+  updatedMessages[messageIndex].reactions = updatedReactions;
+
+  // Update the state
+  setReactions(updatedReactions);
+  setMessages(updatedMessages);
+};
 
   return (
     <div>
