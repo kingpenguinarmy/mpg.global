@@ -7,8 +7,8 @@
 - [ ] Implament features above to work with the UI: 
 
 ## **Backend Coding:**
-- [ ] User Authentication and Authorization: November 2, 2023
-- [ ] Initial Database Setup for Scalable Projects and Secure Users: November 16, 2023
+- [X] User Authentication and Authorization: November 2, 2023
+- [X] Initial Database Setup for Scalable Projects and Secure Users: November 16, 2023
 - [ ] Basic Payment Gateway Integration: December 4, 2023
 
 ## **Frontend Design:**
