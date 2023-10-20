@@ -4,10 +4,11 @@
 - [X] HTML/CSS for Mobile & Web: September 29, 2023
 - [X] User Registration and Login System Implementation: October 13, 2023
 - [X] Basic Search Functionality Implementation: October 22, 2023
+- [X] Basic Payment Gateway Integration: October 30, 2023
 - [ ] Implament features above to work with the UI: 
 
 ## **Backend Coding:**
-- [X] User Authentication and Authorization: November 2, 2023
+- [O] User Authentication and Authorization: November 2, 2023
 - [X] Initial Database Setup for Scalable Projects and Secure Users: November 16, 2023
 - [ ] Basic Payment Gateway Integration: December 4, 2023
 
@@ -28,7 +29,7 @@
 # **Phase 2: Core Features & User Engagement - Estimated Completion: October 26, 2024**
 
 ## **Frontend Coding:**
-- [ ] Messaging Feature Implementation: March 25, 2024
+- [X] Messaging Feature Implementation: March 25, 2024
 - [ ] Task Management System Implementation: April 8, 2024
 - [ ] Notifications System Implementation: April 17, 2024
 - [ ] Group Collaboration Implementation: May 3, 2024
