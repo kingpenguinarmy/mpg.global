@@ -30,8 +30,8 @@
 
 ## **Frontend Coding:**
 - [X] Messaging Feature Implementation: March 25, 2024
-- [ ] Task Management System Implementation: April 8, 2024
-- [ ] Notifications System Implementation: April 17, 2024
+- [X] Task Management System Implementation: April 8, 2024
+- [X] Notifications System Implementation: April 17, 2024
 - [ ] Group Collaboration Implementation: May 3, 2024
 - [ ] File Sharing System Implementation: May 19, 2024
 - [ ] Comments and Feedback System Implementation: May 30, 2024

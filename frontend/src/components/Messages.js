@@ -48,6 +48,11 @@ const Messages = () => {
   const [messageHistory, setMessageHistory] = useState([]); // State to store the message history
   const [pinnedMessages, setPinnedMessages] = useState([]); // State to store the pinned messages
   const [reactions, setReactions] = useState([]); // State to store the reactions for each message
+  const [isTyping, setIsTyping] = useState(false); // State to store whether the user is typing
+  const [editMessage, setEditMessage] = useState(""); // State to store the message being edited
+  const [editMessageId, setEditMessageId] = useState(""); // State to store the ID of the message being edited
+  const [emojiPickerVisible, setEmojiPickerVisible] = useState(false); // State to store whether the emoji picker is visible
+  const [language, setLanguage] = useState("en"); // State to store the selected language for translation
 
   useEffect(() => {
     // Fetch messages for the initial conversation/thread
@@ -80,6 +85,9 @@ const Messages = () => {
 
     // Add the message to the message history
     setMessageHistory([...messageHistory, message]);
+
+    // Reset the message text
+    setMessageText("");
   };
 
   const handleSearch = () => {
@@ -253,6 +261,68 @@ const handleReaction = (messageId, reaction) => {
   setMessages(updatedMessages);
 };
 
+  const handleTyping = () => {
+    // Set the isTyping state to true to indicate that the user is typing
+    setIsTyping(true);
+
+    // Start a timer to reset the isTyping state to false after a period of inactivity
+    setTimeout(() => {
+      setIsTyping(false);
+    }, 3000);
+  };
+
+  const handleEditMessage = (messageId) => {
+    // Find the message with the given ID
+    const messageIndex = messages.findIndex((message) => message._id === messageId);
+    if (messageIndex === -1) {
+      return;
+    }
+
+    // Set the editMessage and editMessageId states
+    setEditMessage(messages[messageIndex].text);
+    setEditMessageId(messageId);
+  };
+
+  const handleUpdateMessage = async () => {
+    // Update the message text on the server
+    const updatedMessage = {
+      _id: editMessageId,
+      text: editMessage,
+    };
+
+    await axios.put(`/api/messages/${editMessageId}`, updatedMessage)
+      .then((response) => {
+        console.log("Message updated successfully!");
+      })
+      .catch((error) => {
+        console.error("Error updating message:", error);
+      });
+
+    // Update the message text in the UI
+    const updatedMessages = [...messages];
+    updatedMessages[messageIndex].text = editMessage;
+    setMessages(updatedMessages);
+
+    // Reset the editMessage and editMessageId states
+    setEditMessage("");
+    setEditMessageId("");
+  };
+
+  const handleDeleteMessage = async (messageId) => {
+    // Delete the message from the server
+    await axios.delete(`/api/messages/${messageId}`)
+      .then((response) => {
+        console.log("Message deleted successfully!");
+      })
+      .catch((error) => {
+        console.error("Error deleting message:", error);
+      });
+
+    // Delete the message from the UI
+    const updatedMessages = messages.filter((message) => message._id !== messageId);
+    setMessages(updatedMessages);
+  };
+
   return (
     <div>
       <h1>Messages</h1>
@@ -268,7 +338,11 @@ const handleReaction = (messageId, reaction) => {
       <input
         type="text"
         value={messageText}
-        onChange={(e) => setMessageText(e.target.value)}
+        onChange={(e) => {
+          setMessageText(e.target.value);
+          handleTyping();
+        }}
+        onKeyPress={handleTyping}
       />
       <button onClick={handleSendMessage}>Send</button>
       <button onClick={handleSaveDraft}>Save Draft</button>
@@ -289,6 +363,19 @@ const handleReaction = (messageId, reaction) => {
             <button onClick={() => handleReaction(message._id, "👍")}>👍</button>
             <button onClick={() => handleReaction(message._id, "👎")}>👎</button>
             <button onClick={() => handleReaction(message._id, "❤️")}>❤️</button>
+            {message._id === editMessageId && (
+              <div>
+                <input
+                  type="text"
+                  value={editMessage}
+                  onChange={(e) => setEditMessage(e.target.value)}
+                />
+                <button onClick={handleUpdateMessage}>Update</button>
+                <button onClick={() => setEditMessage("")}>Cancel</button>
+              </div>
+            )}
+            <button onClick={() => handleEditMessage(message._id)}>Edit</button>
+            <button onClick={() => handleDeleteMessage(message._id)}>Delete</button>
           </li>
         ))}
       </ul>
@@ -326,7 +413,6 @@ const handleReaction = (messageId, reaction) => {
       </div>
       <input type="file" multiple onChange={handleFileChange} />
       <button onClick={handleSendFiles}>Send Files</button>
-      <CodeSnippet language="javascript" code={codeSnippet} />
       <div>
         {files.map((file) => (
           <div key={file.name}>
@@ -334,6 +420,48 @@ const handleReaction = (messageId, reaction) => {
             <p>{file.name}</p>
           </div>
         ))}
+      </div>
+      {isTyping && <div>User is typing...</div>}
+      <div>
+        <button onClick={() => setEmojiPickerVisible(!emojiPickerVisible)}>
+          {emojiPickerVisible ? "Hide Emoji Picker" : "Show Emoji Picker"}
+        </button>
+        {emojiPickerVisible && (
+          <div>
+            {/* Render the emoji picker here */}
+            <ul>
+              <li>😀</li>
+              <li>😁</li>
+              <li>😂</li>
+              <li>🤣</li>
+              <li>😃</li>
+              <li>😄</li>
+              <li>😅</li>
+              <li>😆</li>
+              <li>😉</li>
+              <li>😊</li>
+            </ul>
+          </div>
+        )}
+      </div>
+      <div>
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+        >
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+        </select>
+        <button onClick={() => translateMessages(language)}>
+          Translate Messages
+        </button>
+      </div>
+      <div>
+        <button onClick={handlePinMessage}>Pin Message</button>
+        <button onClick={handleUnpinMessage}>Unpin Message</button>
       </div>
     </div>
   );
